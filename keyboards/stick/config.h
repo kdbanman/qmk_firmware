@@ -14,3 +14,5 @@
 
 // Allow combos to match custom keycodes like S_G, S_R, etc.
 #define COMBO_ALLOW_ACTION_KEYS
+
+#define SECRET_HOLD_MS 1500

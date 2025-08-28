@@ -1,0 +1,2 @@
+#define BOOTMAGIC_ROW 4
+#define BOOTMAGIC_COLUMN 0

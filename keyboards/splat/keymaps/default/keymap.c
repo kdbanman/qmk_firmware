@@ -8,67 +8,148 @@
 #define NAVL 2
 #define NUML 3
 
+#define TD_8_ASTR 0
+#define TD_3_COMM 1
+#define TD_ENT 2
+
+// Left hand
+#define HM_O LCTL_T(KC_O)
+#define HM_AT RALT_T(KC_AT)
+
+#define HM_E LALT_T(KC_E)
+#define HM_LPRN RCTL_T(KC_LPRN)
+
+#define HM_U LGUI_T(KC_U)
+#define HM_RPRN RGUI_T(KC_RPRN)
+
+#define HM_P LCAG_T(KC_P)
+#define HM_DOT HYPR_T(KC_DOT)
+
+#define HM_A LT(NUML, KC_A)
+#define HM_SCLN LT(SYML, KC_SCLN)
+
+// Right hand
+#define HM_H LGUI_T(KC_H)
+#define HM_LBRC RGUI_T(KC_LBRC)
+
+#define HM_T LALT_T(KC_T)
+#define HM_RBRC RCTL_T(KC_RBRC)
+
+#define HM_N RCTL_T(KC_N)
+#define HM_LCBR RALT_T(KC_LCBR)
+
+#define HM_G LCAG_T(KC_G)
+#define HM_C HYPR_T(KC_C)
+
+#define HM_S LT(NAVL, KC_S)
+#define HM_Z LT(SYML, KC_Z)
+
+
+
+tap_dance_action_t tap_dance_actions[] = {
+    [TD_8_ASTR] = ACTION_TAP_DANCE_DOUBLE(KC_8, KC_ASTR),
+    [TD_3_COMM]  = ACTION_TAP_DANCE_DOUBLE(KC_3, KC_COMM),
+    [TD_ENT] = ACTION_TAP_DANCE_DOUBLE(KC_NO, KC_ENT),
+
+};
+
+// Handedness map for Chordal Hold.
+// Use your keyboard's LAYOUT(...) and mark each key: 'L' (left), 'R' (right), '*' (exempt).
+const char PROGMEM chordal_hold_layout[MATRIX_ROWS][MATRIX_COLS] =
+    LAYOUT(
+            'L','L','L','L','L',   'R','R','R','R','R',
+        'L','L','L','L','L','L',   'R','R','R','R','R','R',
+            'L','L','L','L','L',   'R','R','R','R','R',
+                        'L','L',  'R','R',
+                    'L','L','L',  'R','R','R'
+    );
+
+
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     /*
      *     ' , . P Y               F G C R L 
      * ESC A O E U I               D H T N S -
      *     ; Q J K X               B M W V Z
-     *           NUM_LAYER none    none NAV_LAYER
-     *         BKSPC LSHIFT none   ENTER SHIFT SPACE
+     *           NUM_LAYER BOOTLOAD    BOOTLOAD NAV_LAYER
+     *         BKSPC LSHIFT SYM_LAYER   ENTER SHIFT SPACE
      */
     [BASL] = LAYOUT(
-                   KC_QUOT, KC_COMM, KC_DOT, KC_P,   KC_Y,        KC_F,   KC_G,   KC_C,   KC_R,   KC_L,
-          KC_ESC,  KC_A,    KC_O,    KC_E,   KC_U,   KC_I,        KC_D,   KC_H,   KC_T,   KC_N,   KC_S,   KC_MINS,
-                   KC_SCLN, KC_Q,    KC_J,   KC_K,   KC_X,         KC_B,   KC_M,   KC_W,   KC_V,   KC_Z,
-                                             KC_TRNS,  KC_NO,    KC_NO,  KC_TRNS,
-                                KC_BSPC, KC_LSFT, KC_NO,          KC_ENT, KC_LSFT, KC_SPC
-    )
+                KC_QUOT, KC_COMM, HM_DOT,  HM_P,    KC_Y,        KC_F,    HM_G,    HM_C,    KC_R,    KC_L, \
+        KC_ESC,  HM_A,    HM_O,    HM_E,    HM_U,    KC_I,        KC_D,    HM_H,    HM_T,    HM_N,    HM_S,    KC_MINS, \
+                HM_SCLN, KC_Q,    KC_J,    KC_K,    KC_X,        KC_B,    KC_M,    KC_W,    KC_V,    HM_Z, \
+                                            XXXXXXX, QK_BOOT,       QK_BOOT,   TD(TD_ENT), \
+                                    KC_BSPC, KC_LSFT, XXXXXXX,       XXXXXXX,  KC_TAB, KC_SPC \
+    ),
 
     // /*
-    //  *     1 2 3 4 5               6 7 8 9 0
-    //  * TAB ! @ # $ %               ^ & * ( ) +
-    //  *     ~ ` { } |               \ < > ? _
-    //  *           BAS_LAYER none    none SYM_LAYER
-    //  *         BKSPC LSHIFT none   ENTER SHIFT SPACE
+    //  *       " < > $ %               ^ & * | ?
+    //  * TRANS ! @ ( ) +               = [ ] { } _
+    //  *       : - # / `               ~ \ ' , .
+    //  * (rest are TRANS)
     //  */
-    // [SYML] = LAYOUT(
-    //                KC_1,    KC_2,    KC_3,    KC_4,   KC_5,        KC_6,   KC_7,   KC_8,   KC_9,   KC_0,
-    //       KC_TAB,  KC_EXLM, KC_AT,   KC_HASH, KC_DLR, KC_PERC,     KC_CIRC,KC_AMPR,KC_ASTR,KC_LPRN,KC_RPRN,KC_PLUS,
-    //                                                               KC_TILD,KC_GRV, KC_LCBR,KC_RCBR,KC_PIPE,
-    //                                          KC_TRNS,  KC_NO,    KC_NO,  KC_TRNS,
-    //                             KC_BSPC, KC_LSFT, KC_NO,          KC_ENT, KC_LSFT, KC_SPC
-    // ),
+    [SYML] = LAYOUT(
+                KC_DQUO, KC_LABK, KC_RABK, KC_DLR,  KC_PERC,     KC_CIRC, KC_AMPR, KC_ASTR, KC_PIPE, KC_QUES, \
+        KC_TRNS, KC_EXLM, HM_AT,   HM_LPRN, HM_RPRN, KC_PLUS,     KC_EQL,  HM_LBRC, HM_RBRC, HM_LCBR, KC_RCBR, KC_UNDS, \
+                KC_COLN, KC_MINS, KC_HASH, KC_SLSH, KC_GRV,    KC_TILD, KC_BSLS, KC_QUOT, KC_COMM, KC_DOT, \
+                                            KC_TRNS, KC_TRNS,       KC_TRNS,   KC_TRNS, \
+                                    KC_TRNS, KC_TRNS, KC_TRNS,       KC_TRNS,  KC_TRNS, KC_TRNS \
+    ),
 
     // /*
-    //  *    7 8 9 - =               0 ) ( _ +
-    //     * TAB 4 5 6 / *               % $ # @ !
-    //     *    1 2 3 . ,               < > ? ~ `
-    //     *         TRANS none    none TRANS
-    //     *       BKSPC LSHIFT none   ENTER SHIFT SPACE
-    //     * 
+    //  *   
     // */
-    // [NUML] = LAYOUT(
-    //                KC_7,    KC_8,    KC_9,    KC_MINS,KC_EQL,      KC_0,   KC_RPRN,KC_LPRN,KC_UNDS,KC_PLUS,
-    //       KC_TAB,  KC_4,    KC_5,    KC_6,   KC_SLSH,KC_ASTR,     KC_PERC,KC_DLR, KC_HASH,KC_AT,  KC_EXLM,
-    //                                                               KC_1,   KC_2,   KC_3,   KC_DOT, KC_COMM,
-    //                                          KC_TRNS,  KC_NO,    KC_NO,  KC_TRNS,
-    //                             KC_BSPC, KC_LSFT, KC_NO,          KC_ENT, KC_LSFT, KC_SPC
-    // ),
+    [NUML] = LAYOUT(
+                KC_DQUO, KC_LABK, KC_RABK, KC_DLR,  KC_PERC,     KC_CIRC, KC_7, TD(TD_8_ASTR), KC_9, KC_QUES, \
+        KC_TRNS, KC_EXLM, HM_AT,   HM_LPRN, HM_RPRN, KC_PLUS,     KC_EQL,  KC_4, KC_5, KC_6, KC_0, KC_MINS, \
+                KC_TRNS, KC_COLN, KC_MINS, KC_HASH, KC_SLSH,     KC_TILD, KC_1, KC_2, TD(TD_3_COMM), KC_DOT, \
+                                            KC_TRNS, KC_TRNS,       KC_TRNS,   KC_TRNS, \
+                                    KC_TRNS, KC_TRNS, KC_TRNS,       KC_TRNS,  KC_TRNS, KC_TRNS \
+    ),
 
-    // /*
-    //  *     UP                    PGUP
-    //  * LEFT DOWN RIGHT         HOME END
-    //  *     ESC                  PGDN
-    //  *
-    //  *        BAS_LAYER none    none SYM_LAYER
-    //  *      BKSPC LSHIFT none   ENTER SHIFT SPACE
-    //     */
-    // [NAVL] = LAYOUT(
-    //                KC_UP,   KC_NO,   KC_NO,   KC_NO,   KC_PGUP,     KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
-    //       KC_LEFT, KC_DOWN, KC_RGHT, KC_NO,   KC_NO,   KC_NO,       KC_HOME, KC_END,  KC_NO,   KC_NO,   KC_NO,   KC_NO,
-    //                                                               KC_ESC,  KC_NO,   KC_NO,   KC_PGDN, KC_NO,
-    //                                          MO(BASL),  KC_NO,    KC_NO,  MO(SYML),
-    //                             KC_BSPC, KC_LSFT, KC_NO,          KC_ENT,  KC_LSFT, KC_SPC
-    // )
+    [NAVL] = LAYOUT(
+                XXXXXXX, XXXXXXX, KC_UP, XXXXXXX,  XXXXXXX,     XXXXXXX, LCTL(LALT(KC_RGUI)), LSFT(LCTL(LALT(KC_LGUI))), XXXXXXX, XXXXXXX, \
+        XXXXXXX, XXXXXXX, KC_LEFT,   KC_DOWN, KC_RGHT, XXXXXXX,     XXXXXXX,  KC_RGUI, KC_RALT, KC_RCTL, KC_RSFT, XXXXXXX, \
+                XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
+                                            KC_TRNS, KC_TRNS,       KC_TRNS,   KC_TRNS, \
+                                    KC_TRNS, KC_TRNS, KC_TRNS,       KC_TRNS,  KC_TRNS, KC_TRNS \
+    )
      
 };
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  switch (keycode) {
+    // Right Alt when held, '@' when tapped
+    case HM_AT:
+      if (record->tap.count && record->event.pressed) {
+        tap_code16(KC_AT);
+        return false;
+      }
+      break;
+
+    // Right Ctrl when held, '(' when tapped
+    case HM_LPRN:
+      if (record->tap.count && record->event.pressed) {
+        tap_code16(KC_LPRN);
+        return false;
+      }
+      break;
+
+    // Right GUI when held, ')' when tapped
+    case HM_RPRN:
+      if (record->tap.count && record->event.pressed) {
+        tap_code16(KC_RPRN);
+        return false;
+      }
+      break;
+
+    // Right Alt when held, '{' when tapped
+    case HM_LCBR:
+      if (record->tap.count && record->event.pressed) {
+        tap_code16(KC_LCBR);
+        return false;
+      }
+      break;
+  }
+  return true;
+}

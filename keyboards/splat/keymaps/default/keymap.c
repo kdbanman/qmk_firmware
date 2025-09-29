@@ -68,26 +68,20 @@ const char PROGMEM chordal_hold_layout[MATRIX_ROWS][MATRIX_COLS] =
             'L','L','L','L','L',   'R','R','R','R','R',
         'L','L','L','L','L','L',   'R','R','R','R','R','R',
             'L','L','L','L','L',   'R','R','R','R','R',
-                        'L','L',   'R','R',
-                    '*','L','L',   'R','R','*'
+                        '*','*',   '*','*',
+                    '*','*','*',   '*','*','*'
     );
 
 
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-    /*
-     *     ' , . P Y               F G C R L 
-     * ESC A O E U I               D H T N S -
-     *     ; Q J K X               B M W V Z
-     *           NUM_LAYER BOOTLOAD    BOOTLOAD NAV_LAYER
-     *         BKSPC LSHIFT SYM_LAYER   ENTER SHIFT SPACE
-     */
+    
     [BASL] = LAYOUT(
-                KC_QUOT, KC_COMM, HM_DOT,  HM_P,    KC_Y,        KC_F,    HM_G,    HM_C,    KC_R,    KC_L, \
-        KC_ESC,  KC_A,    HM_O,    HM_E,    HM_U,    KC_I,        KC_D,    HM_H,    HM_T,    HM_N,    KC_S,    KC_MINS, \
-                KC_SCLN, KC_Q,    KC_J,    KC_K,    KC_X,        KC_B,    KC_M,    KC_W,    KC_V,    KC_Z, \
-                                            KC_LSFT, QK_BOOT,       QK_BOOT,   MO(SYML), \
-                                    HM_BSPC, XXXXXXX, XXXXXXX,       XXXXXXX,  XXXXXXX, HM_SPC \
+                KC_QUOT , KC_COMM , HM_DOT  , HM_P    , KC_Y    ,         KC_F    , HM_G    , HM_C    , KC_R    , KC_L    , \
+      KC_ESC  , KC_A    , HM_O    , HM_E    , HM_U    , KC_I    ,         KC_D    , HM_H    , HM_T    , HM_N    , KC_S    , KC_MINS , \
+                KC_SCLN , KC_Q    , KC_J    , KC_K    , KC_X    ,         KC_B    , KC_M    , KC_W    , KC_V    , KC_Z    , \
+                                              KC_LSFT , QK_BOOT ,         QK_BOOT , MO(SYML), \
+                                    HM_BSPC , XXXXXXX , XXXXXXX ,         XXXXXXX , XXXXXXX , HM_SPC \
     ),
 
     // 
@@ -97,18 +91,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     //
     [SYML] = LAYOUT(
                 KC_DQUO, KC_LABK, KC_RABK, KC_DLR,  KC_PERC,     KC_CIRC, KC_AMPR, KC_ASTR, KC_PIPE, KC_QUES, \
-        KC_TRNS, KC_EXLM, HM_AT,   HM_LPRN, HM_RPRN, KC_PLUS,     KC_EQL,  HM_LBRC, HM_RBRC, HM_LCBR, KC_RCBR, KC_UNDS, \
+        _______, KC_EXLM, HM_AT,   HM_LPRN, HM_RPRN, KC_PLUS,     KC_EQL,  HM_LBRC, HM_RBRC, HM_LCBR, KC_RCBR, KC_UNDS, \
                 KC_COLN, KC_MINS, KC_HASH, KC_SLSH, KC_GRV,    KC_TILD, KC_BSLS, KC_QUOT, KC_COMM, KC_DOT, \
-                                            KC_TRNS, KC_TRNS,       KC_TRNS,   KC_TRNS, \
-                                    KC_TRNS, KC_TRNS, KC_TRNS,       KC_TRNS,  KC_TRNS, KC_TRNS \
+                                            _______, _______,       _______,   _______, \
+                                    _______, _______, _______,       _______,  _______, _______ \
     ),
 
     [NUML] = LAYOUT(
                 KC_DQUO, KC_LABK, KC_RABK, KC_DLR,  KC_PERC,     KC_CIRC, KC_7, TD(TD_8_ASTR), KC_9, KC_QUES, \
-        KC_TRNS, HM_EXLM, HM_AT,   HM_LPRN, HM_RPRN, KC_PLUS,     KC_EQL,  KC_4, KC_5, KC_6, KC_0, KC_MINS, \
-                KC_TRNS, KC_COLN, KC_MINS, KC_HASH, KC_SLSH,     KC_TILD, KC_1, KC_2, TD(TD_3_COMM), KC_DOT, \
-                                            KC_TRNS, KC_TRNS,       KC_TRNS,   KC_TRNS, \
-                                    KC_TRNS, KC_TRNS, KC_TRNS,       KC_TRNS,  KC_TRNS, KC_ENT \
+        _______, HM_EXLM, HM_AT,   HM_LPRN, HM_RPRN, KC_PLUS,     KC_EQL,  KC_4, KC_5, KC_6, KC_0, KC_MINS, \
+                _______, KC_COLN, KC_MINS, KC_HASH, KC_SLSH,     KC_TILD, KC_1, KC_2, TD(TD_3_COMM), KC_DOT, \
+                                            _______, _______,       _______,   _______, \
+                                    _______, _______, _______,       _______,  _______, KC_ENT \
     ),
 
     // HOLD SPACE
@@ -116,8 +110,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                 XXXXXXX, XXXXXXX, KC_UP, XXXXXXX,  XXXXXXX,     XXXXXXX, LCTL(LALT(KC_RGUI)), LSFT(LCTL(LALT(KC_LGUI))), XXXXXXX, XXXXXXX, \
         XXXXXXX, XXXXXXX, KC_LEFT,   KC_DOWN, KC_RGHT, XXXXXXX,     XXXXXXX,  KC_RGUI, KC_RALT, KC_RCTL, KC_RSFT, XXXXXXX, \
                 XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
-                                            KC_TRNS, KC_TRNS,       KC_TRNS,   KC_TRNS, \
-                                    KC_TAB, KC_TRNS, KC_TRNS,       KC_TRNS,  KC_TRNS, KC_TRNS \
+                                            _______, _______,       _______,   _______, \
+                                    KC_TAB, _______, _______,       _______,  _______, _______ \
     )
      
 };

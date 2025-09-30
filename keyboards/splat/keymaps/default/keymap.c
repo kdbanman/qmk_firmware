@@ -8,58 +8,63 @@
 #define NAVL 2
 #define NUML 3
 
-#define TD_8_ASTR 0
-#define TD_3_COMM 1
-#define TD_ENT 2
+// Tap dance
+// Use this in a layout as TD(TD_EXAMPLE)
+# define TD_EXAMPLE 0
+tap_dance_action_t tap_dance_actions[] = {
+    [TD_EXAMPLE] = ACTION_TAP_DANCE_DOUBLE(KC_8, KC_ASTR),
+};
 
 
-// Left hand
-#define HM_EXLM LSFT_T(KC_EXLM)
+// Hyper and Shift Hyper keys
+#define KC_HYP LCTL(LALT(KC_RGUI))
+#define KC_SHYP LSFT(LCTL(LALT(KC_RGUI)))
 
-#define HM_O LCTL_T(KC_O)
-#define HM_AT RCTL_T(KC_AT)
 
-#define HM_E LALT_T(KC_E)
-#define HM_LPRN RALT_T(KC_LPRN)
+// Left hand, base layer
+#define HM_O LCTL_T(KC_O)           // O -> Ctrl
+#define HM_E LALT_T(KC_E)           // E -> Alt
+#define HM_U LGUI_T(KC_U)           // U -> Gui
+#define HM_P LCAG_T(KC_P)           // P -> Hyper
+#define HM_DOT HYPR_T(KC_DOT)       // . -> Shift Hyper
 
-#define HM_U LGUI_T(KC_U)
-#define HM_RPRN RGUI_T(KC_RPRN)
+// Left hand, symbol layer
+#define HM_EXLM LSFT_T(KC_EXLM)     // ! -> Shift
+#define HM_AT LCTL_T(KC_AT)         // @ -> Ctrl
+#define HM_LPRN LALT_T(KC_LPRN)     // ( -> Alt
+#define HM_RPRN LGUI_T(KC_RPRN)     // ) -> Gui
 
-#define HM_P LCAG_T(KC_P)
-#define HM_DOT HYPR_T(KC_DOT)
+// Left hand, num layer
+#define HM_CDOT LCTL_T(KC_DOT)      // . -> Ctrl
+#define HM_MINS LALT_T(KC_MINS)     // - -> Alt
+#define HM_PLUS LGUI_T(KC_PLUS)     // + -> Gui
 
-// #define HM_A LT(NUML, KC_A)
-// #define HM_SCLN LT(SYML, KC_SCLN)
-
+// Left thumb, backspace, hold for num layer
 #define HM_BSPC LT(NUML, KC_BSPC)
 
 
-// Right hand
-#define HM_H LGUI_T(KC_H)
-#define HM_LBRC RGUI_T(KC_LBRC)
+// Right hand, base layer
+#define HM_H RGUI_T(KC_H)           // H -> Gui
+#define HM_T RALT_T(KC_T)           // T -> Alt
+#define HM_N RCTL_T(KC_N)           // N -> Ctrl
+#define HM_G RCAG_T(KC_G)           // G -> Hyper
+#define HM_C HYPR_T(KC_C)           // C -> Shift Hyper
 
-#define HM_T LALT_T(KC_T)
-#define HM_RBRC RALT_T(KC_RBRC)
+// Right hand, symbol layer
+#define HM_LBRC RGUI_T(KC_LBRC)     // [ -> Gui
+#define HM_RBRC RALT_T(KC_RBRC)     // ] -> Alt
+#define HM_LCBR RCTL_T(KC_LCBR)     // { -> Ctrl
+#define HM_RCBR RSFT_T(KC_RCBR)     // } -> Shift
 
-#define HM_N RCTL_T(KC_N)
-#define HM_LCBR RCTL_T(KC_LCBR)
+// Right hand, num layer
+#define HM_4 RGUI_T(KC_4)           // 4 -> Gui
+#define HM_5 RALT_T(KC_5)           // 5 -> Alt
+#define HM_6 RCTL_T(KC_6)           // 6 -> Ctrl
+#define HM_0 RSFT_T(KC_0)           // 0 -> Shift
 
-#define HM_G LCAG_T(KC_G)
-#define HM_C HYPR_T(KC_C)
-
-// #define HM_S LT(NAVL, KC_S)
-// #define HM_Z LT(SYML, KC_Z)
-
+// Right thumb, space, hold for nav layer
 #define HM_SPC LT(NAVL, KC_SPC)
 
-
-
-tap_dance_action_t tap_dance_actions[] = {
-    [TD_8_ASTR] = ACTION_TAP_DANCE_DOUBLE(KC_8, KC_ASTR),
-    [TD_3_COMM]  = ACTION_TAP_DANCE_DOUBLE(KC_3, KC_COMM),
-    [TD_ENT] = ACTION_TAP_DANCE_DOUBLE(KC_NO, KC_ENT),
-
-};
 
 // Handedness map for Chordal Hold.
 // Use your keyboard's LAYOUT(...) and mark each key: 'L' (left), 'R' (right), '*' (exempt).
@@ -72,51 +77,72 @@ const char PROGMEM chordal_hold_layout[MATRIX_ROWS][MATRIX_COLS] =
                     '*','*','*',   '*','*','*'
     );
 
-
-
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-    
+
     [BASL] = LAYOUT(
                 KC_QUOT , KC_COMM , HM_DOT  , HM_P    , KC_Y    ,         KC_F    , HM_G    , HM_C    , KC_R    , KC_L    , \
       KC_ESC  , KC_A    , HM_O    , HM_E    , HM_U    , KC_I    ,         KC_D    , HM_H    , HM_T    , HM_N    , KC_S    , KC_MINS , \
                 KC_SCLN , KC_Q    , KC_J    , KC_K    , KC_X    ,         KC_B    , KC_M    , KC_W    , KC_V    , KC_Z    , \
-                                              KC_LSFT , QK_BOOT ,         QK_BOOT , MO(SYML), \
+                                              KC_LSFT , XXXXXXX ,         XXXXXXX , MO(SYML), \
                                     HM_BSPC , XXXXXXX , XXXXXXX ,         XXXXXXX , XXXXXXX , HM_SPC \
     ),
 
-    // 
-    //       " < > $ %               ^ & * | ?
-    // TRANS ! @ ( ) +               = [ ] { } _
-    //       : - # /                ~ \ ' , .
+    //
+    // B for backslash
+    //
+    //   " < > $ %          ^ & * | ?
+    //   ! @ ( ) +          = [ ] { }
+    //   :   # / `          ~ B
     //
     [SYML] = LAYOUT(
-                KC_DQUO, KC_LABK, KC_RABK, KC_DLR,  KC_PERC,     KC_CIRC, KC_AMPR, KC_ASTR, KC_PIPE, KC_QUES, \
-        _______, KC_EXLM, HM_AT,   HM_LPRN, HM_RPRN, KC_PLUS,     KC_EQL,  HM_LBRC, HM_RBRC, HM_LCBR, KC_RCBR, KC_UNDS, \
-                KC_COLN, KC_MINS, KC_HASH, KC_SLSH, KC_GRV,    KC_TILD, KC_BSLS, KC_QUOT, KC_COMM, KC_DOT, \
-                                            _______, _______,       _______,   _______, \
-                                    _______, _______, _______,       _______,  _______, _______ \
+                KC_DQUO , KC_LABK , KC_RABK , KC_DLR  , KC_PERC ,         KC_CIRC , KC_AMPR , KC_ASTR , KC_PIPE , KC_QUES , \
+      KC_BSPC , KC_EXLM , HM_AT   , HM_LPRN , HM_RPRN , KC_PLUS ,         KC_EQL  , HM_LBRC , HM_RBRC , HM_LCBR , HM_RCBR , KC_SPC  , \
+                KC_COLN , XXXXXXX , KC_HASH , KC_SLSH , KC_GRV  ,         KC_TILD , KC_BSLS , XXXXXXX , XXXXXXX , XXXXXXX  , \
+                                              _______ , _______ ,         _______ , _______ , \
+                                    _______  , _______ , _______ ,         _______ , _______ , _______ \
     ),
 
+    // HOLD BACKSPACE
+    // - have shift on left pinky
+    // - need backspace, but holding, so move to right thumb
+    // - most common num symbols on left hand
+    // - HRM on left hand and right hand
+    //
+    //     $ : =            7 8 9
+    //     . - +            4 5 6 0
+    //     % / *            1 2 3
     [NUML] = LAYOUT(
-                KC_DQUO, KC_LABK, KC_RABK, KC_DLR,  KC_PERC,     KC_CIRC, KC_7, KC_8, KC_9, KC_QUES, \
-        _______, HM_EXLM, HM_AT,   HM_LPRN, HM_RPRN, KC_PLUS,     KC_EQL,  KC_4, KC_5, KC_6, KC_0, KC_MINS, \
-                 KC_COLN, KC_MINS, KC_HASH, KC_SLSH, KC_GRV,     KC_TILD, KC_1, KC_2, KC_3, KC_DOT, \
-                                            _______, _______,       _______,   _______, \
-                                    _______, _______, _______,       _______,  _______, KC_ENT \
+                XXXXXXX , KC_DLR  , KC_COLN , KC_EQL  , XXXXXXX ,         XXXXXXX , KC_7    , KC_8    , KC_9    , XXXXXXX , \
+      KC_BSPC , KC_LSFT , HM_CDOT , HM_MINS , HM_PLUS , XXXXXXX ,         XXXXXXX , HM_4    , HM_5    , HM_6    , HM_0    , KC_SPC  , \
+                XXXXXXX , KC_PERC , KC_HASH , KC_SLSH , XXXXXXX ,         XXXXXXX , KC_1    , KC_2    , KC_3    , KC_DOT  , \
+                                              _______ , _______ ,         _______ , _______ , \
+                                    _______ , _______ , _______ ,         _______ , _______ , KC_ENT \
     ),
 
     // HOLD SPACE
+    // - have shift on right pinky
+    // - backspace becomes tab
+    // - no need for backspace on nav layer
+    // - alternative space could be useful, so replace shift
     [NAVL] = LAYOUT(
-                XXXXXXX, XXXXXXX, KC_UP, XXXXXXX,  XXXXXXX,     XXXXXXX, LCTL(LALT(KC_RGUI)), LSFT(LCTL(LALT(KC_LGUI))), XXXXXXX, XXXXXXX, \
-        XXXXXXX, XXXXXXX, KC_LEFT,   KC_DOWN, KC_RGHT, XXXXXXX,     XXXXXXX,  KC_RGUI, KC_RALT, KC_RCTL, KC_RSFT, XXXXXXX, \
-                XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
-                                            _______, _______,       _______,   _______, \
-                                    KC_TAB, _______, _______,       _______,  _______, _______ \
+                XXXXXXX , XXXXXXX , KC_UP   , XXXXXXX , XXXXXXX ,         XXXXXXX , KC_HYP  , KC_SHYP , XXXXXXX , XXXXXXX , \
+      KC_BSPC , XXXXXXX , KC_LEFT , KC_DOWN , KC_RGHT , XXXXXXX ,         XXXXXXX , KC_RGUI , KC_RALT , KC_RCTL , KC_RSFT , KC_SPC  , \
+                XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX ,         XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , \
+                                              _______  , _______ ,         _______ , _______ , \
+                                    KC_TAB  , _______ , QK_BOOT ,         _______ , _______ , _______ \
     )
-     
+
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+
+  // Custom homerow mod keys that need to send shifted keycodes when tapped.
+  // (Standard mod-tap functionality doesn't support the shifted keycodes - the
+  // HM_* cases work around that limitation.)
+
+  // Without this, the following keys would send unshifted keycodes when tapped.
+  // e.g. '9' instead of '('
+
   switch (keycode) {
     // Right Alt when held, '@' when tapped
     case HM_AT:
@@ -146,6 +172,22 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case HM_LCBR:
       if (record->tap.count && record->event.pressed) {
         tap_code16(KC_LCBR);
+        return false;
+      }
+      break;
+
+    // Right Shift when held, '}' when tapped
+    case HM_RCBR:
+      if (record->tap.count && record->event.pressed) {
+        tap_code16(KC_RCBR);
+        return false;
+      }
+      break;
+
+    // Right GUI when held, '+' when tapped
+    case HM_PLUS:
+      if (record->tap.count && record->event.pressed) {
+        tap_code16(KC_PLUS);
         return false;
       }
       break;

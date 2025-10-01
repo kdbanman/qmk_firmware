@@ -35,9 +35,9 @@ tap_dance_action_t tap_dance_actions[] = {
 #define HM_RPRN LGUI_T(KC_RPRN)     // ) -> Gui
 
 // Left hand, num layer
-#define HM_CDOT LCTL_T(KC_DOT)      // . -> Ctrl
-#define HM_MINS LALT_T(KC_MINS)     // - -> Alt
-#define HM_PLUS LGUI_T(KC_PLUS)     // + -> Gui
+#define HM_MINS LCTL_T(KC_MINS)     // - -> Ctrl
+#define HM_PLUS LALT_T(KC_PLUS)     // + -> Alt
+#define HM_CDOT LGUI_T(KC_DOT)      // . -> Gui
 
 // Left thumb, backspace, hold for num layer
 #define HM_BSPC LT(NUML, KC_BSPC)
@@ -108,13 +108,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // - most common num symbols on left hand
     // - HRM on left hand and right hand
     //
-    //     $ : =            7 8 9
-    //     . - +            4 5 6 0
-    //     % / *            1 2 3
+    //     : = $            7 8 9
+    //     - + .            4 5 6 0
+    //     / * %            1 2 3
+    //
     [NUML] = LAYOUT(
-                XXXXXXX , KC_DLR  , KC_COLN , KC_EQL  , XXXXXXX ,         XXXXXXX , KC_7    , KC_8    , KC_9    , XXXXXXX , \
-      KC_BSPC , KC_LSFT , HM_CDOT , HM_MINS , HM_PLUS , XXXXXXX ,         XXXXXXX , HM_4    , HM_5    , HM_6    , HM_0    , KC_SPC  , \
-                XXXXXXX , KC_PERC , KC_HASH , KC_SLSH , XXXXXXX ,         XXXXXXX , KC_1    , KC_2    , KC_3    , KC_DOT  , \
+                XXXXXXX , KC_COLN , KC_EQL  , KC_DLR  , XXXXXXX ,         XXXXXXX , KC_7    , KC_8    , KC_9    , XXXXXXX , \
+      KC_BSPC , KC_LSFT , HM_MINS , HM_PLUS , HM_CDOT , XXXXXXX ,         XXXXXXX , HM_4    , HM_5    , HM_6    , HM_0    , KC_SPC  , \
+                XXXXXXX , KC_SLSH , KC_ASTR , KC_PERC , XXXXXXX ,         XXXXXXX , KC_1    , KC_2    , KC_3    , KC_DOT  , \
                                               _______ , _______ ,         _______ , _______ , \
                                     _______ , _______ , _______ ,         _______ , _______ , KC_ENT \
     ),
@@ -128,7 +129,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                 XXXXXXX , XXXXXXX , KC_UP   , XXXXXXX , XXXXXXX ,         XXXXXXX , KC_HYP  , KC_SHYP , XXXXXXX , XXXXXXX , \
       KC_BSPC , XXXXXXX , KC_LEFT , KC_DOWN , KC_RGHT , XXXXXXX ,         XXXXXXX , KC_RGUI , KC_RALT , KC_RCTL , KC_RSFT , KC_SPC  , \
                 XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX ,         XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , XXXXXXX , \
-                                              _______  , _______ ,         _______ , _______ , \
+                                              _______ , _______ ,         _______ , _______ , \
                                     KC_TAB  , _______ , QK_BOOT ,         _______ , _______ , _______ \
     )
 
